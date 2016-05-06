@@ -1,0 +1,6 @@
+{
+  "name": "ENGLISH",
+  "tagline": "Write code in ENGLISH; like a pro.",
+  "body": "# ENGLISH, a programming language\r\n\r\nENGLISH is a programming language where you can write code much in the same way as you'd write English sentences.\r\n\r\n### How do I run it?\r\n\r\n- Clone this repo & cd into it.\r\n- `npm link`\r\n- `english <file>.eng`\r\n\r\nIf you're working on a pull request, you can compile the nearley grammar with `nearleyc src/grammar.ne -o src/grammar.js`.",
+  "note": "Don't delete this file! It's used internally to help with page regeneration."
+}
