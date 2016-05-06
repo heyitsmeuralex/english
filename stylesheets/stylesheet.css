@@ -9,6 +9,10 @@ body {
   line-height: 1.5;
   color: #606c71; }
 
+::selection {
+  background-color: #df405a;
+  color: white; }
+
 a {
   color: #87314e;
   text-decoration: none; }
