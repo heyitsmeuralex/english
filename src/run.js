@@ -7,21 +7,21 @@ const grammar = require('./grammar')
 const parser  = new nearley.Parser(grammar.ParserRules, grammar.ParserStart)
 const interp  = require('./interp')
 const args    = process.argv.splice(2)
-const file    = args[0]
-const useDev  = args[1]
 
-let results
+// TODO: add 'build' and stuff lolz
 
-fs.readFile(file, 'utf8', (err, data) => {
-  if(err) throw err
-  
-  results = parser.feed(data).results[0]
-  
-  if(useDev) {
-    console.log('Amount of results:', results.length)
-    console.log('Results:')
-    console.dir(results, { depth: null })
-  }
+switch(args[0]) {
+  default:
+  const file   = args[0]
+  const useDev = args[1] == 'true' ? true : false
+  let results
 
-  interp(results)
-})
+  fs.readFile(file, 'utf8', (err, data) => {
+    if(err) throw err
+    
+    data = data.replace(/[\n\r]+/g, '\n')
+    results = parser.feed(data).results
+
+    interp(results, useDev)
+  })
+}
