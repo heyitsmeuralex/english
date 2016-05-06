@@ -13,8 +13,8 @@ var parseIntData = function(int, doParseInt) {
 
 @builtin "whitespace.ne"
 
-Program -> _ (_program _):? {% function(d) { return d[1] ? d[1][0] : [] } %}
-_program -> Command CommandSeperator:+ _ _program {% function(d, _, reject) { if(d[0][0][0] !== C.PLAIN) return reject; return [d[0], ...d[d.length - 1]] } %}
+Program -> _ (_program:+ _):? {% function(d) { return d[1] ? d[1][0] : [] } %}
+_program -> Command CommandSeperator:+ {% function(d, _, reject) { if(d[0][0][0] !== C.PLAIN) return reject; return [d[0], ...d[d.length - 1]] } %}
           | Command CommandSeperator:+ {% function(d, _, reject) { if(d[0][0][0] !== C.PLAIN) return reject; return [d[0]] } %}
           | Command {% function(d, _, reject) { if(d[0][0][0] !== C.PLAIN) return reject; } %}
 

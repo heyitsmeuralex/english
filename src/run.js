@@ -15,15 +15,13 @@ let results
 fs.readFile(file, 'utf8', (err, data) => {
   if(err) throw err
   
-  results = parser.feed(data).results
+  results = parser.feed(data).results[0]
   
   if(useDev) {
     console.log('Amount of results:', results.length)
     console.log('Results:')
     console.dir(results, { depth: null })
   }
-
-  if(!results) throw 'O_o'
 
   interp(results)
 })
