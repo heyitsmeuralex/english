@@ -6,6 +6,9 @@
   "scripts": {
     "test": "node src/run.js tests/test.eng"
   },
+  "bin": {
+    "english": "src/run.js"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/nanalan/english.git"
