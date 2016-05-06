@@ -1,0 +1,26 @@
+{
+  "name": "english",
+  "version": "0.0.1",
+  "description": "A programming language designed to look like the English language.",
+  "main": "src/run.js",
+  "scripts": {
+    "test": "node src/run.js tests/test.eng"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/nanalan/english.git"
+  },
+  "author": "nanalan",
+  "contributors": [
+    "nanalan",
+    "kvackkvack"
+  ],
+  "license": "GPL-3",
+  "bugs": {
+    "url": "https://github.com/nanalan/english/issues"
+  },
+  "homepage": "https://github.com/nanalan/english#readme",
+  "dependencies": {
+    "nearley": "^2.4.1"
+  }
+}
