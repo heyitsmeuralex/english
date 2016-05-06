@@ -22,6 +22,6 @@ switch(args[0]) {
     data = data.replace(/[\n\r]+/g, '\n')
     results = parser.feed(data).results
 
-    interp(results, useDev)
+    interp.interp(results, [], [], useDev)
   })
 }
