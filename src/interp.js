@@ -1,3 +1,5 @@
+'use strict'
+
 const varsUtil = require('./variables')
 const PLAIN    = require('./constants').PLAIN
 let   interp   = {}
@@ -8,16 +10,23 @@ interp.interp = (tree, varNames, varValues, dev) => {
     console.log('Results:'); console.dir(tree, {depth:null})
   }
 
-  [varNames, varValues] = varsUtil.addBuiltinsTo(varNames, varValues)
+  varNames  = varsUtil.addBuiltinsToNames(varNames)
+  varValues = varsUtil.addBuiltinsToValues(varValues)
 
   console.log(varNames, varValues)
-  return interp.interpAll(tree[0], varNames, varValues)
+  return interp.interpCommands(tree[0], varNames, varValues)
 }
 
-interp.interpAll = function(commands, varNames, varValues) {
+interp.interpCommands = function(commands, varNames, varValues) {
   commands.forEach(command => {
-    // TODO
+    let commandAndArgs = interp.findCommandAndArgs(command)
+    command = commandAndArgs[0], args = commandAndArgs[1]
+    // command.call(args)
   })
+}
+
+interp.findCommandAndArgs = function(command, varNames, varValues) {
+  return [null, null]
 }
 
 module.exports = interp

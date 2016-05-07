@@ -1,13 +1,18 @@
+'use strict'
+
 const PLAIN = require('./constants').PLAIN
 let variables = {}
 
 variables.builtinNames  = []
 variables.builtinValues = []
 
-variables.addBuiltinsTo = function(names, values) {
+variables.addBuiltinsToNames = function(names) {
   names.push(...variables.builtinNames)
-  values.push(...variables.builtinValues)
-  return [names, values]
+  return names
+}
+variables.addBuiltinsToValues = function(values) {
+  names.push(...variables.builtinValues)
+  return values
 }
 
 variables.addBuiltinAsArray = function(builtin, value) {
