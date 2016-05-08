@@ -11,7 +11,7 @@ variables.addBuiltinsToNames = function(names) {
   return names
 }
 variables.addBuiltinsToValues = function(values) {
-  names.push(...variables.builtinValues)
+  values.push(...variables.builtinValues)
   return values
 }
 

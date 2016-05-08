@@ -20,7 +20,8 @@ interp.interp = (tree, varNames, varValues, dev) => {
 interp.interpCommands = function(commands, varNames, varValues) {
   commands.forEach(command => {
     let commandAndArgs = interp.findCommandAndArgs(command)
-    command = commandAndArgs[0], args = commandAndArgs[1]
+    command = commandAndArgs[0]
+    let args = commandAndArgs[1]
     // command.call(args)
   })
 }
