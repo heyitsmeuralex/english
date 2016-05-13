@@ -1,2 +1,1 @@
-Print 'hi there', then print 'omg it works!!1!'.
-Finally make sure to end.
+Define x and set x to 'hi there, im x', then print x.

@@ -2,7 +2,7 @@
 
 let moduleExports = {},
     addConstant   = function(constant, value) {
-      moduleExports[constant] = (value === undefined ? constant : value)
+      moduleExports[constant] = (value === undefined ? constant.toLowerCase() : value)
     }
 
 addConstant('PLAIN')
