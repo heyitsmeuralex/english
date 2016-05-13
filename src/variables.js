@@ -22,7 +22,7 @@ variables.addBuiltinAsArray = function(builtin, value) {
 }
 
 variables.addBuiltinAsArray(
-  [[PLAIN, "log"], ["any"], [PLAIN, "three"], [PLAIN, "times"]]
+  [[PLAIN, 'print'], 'any', (x) => console.log(x[1])]
 )
 
 module.exports = variables

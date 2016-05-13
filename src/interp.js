@@ -13,21 +13,40 @@ interp.interp = (tree, varNames, varValues, dev) => {
   varNames  = varsUtil.addBuiltinsToNames(varNames)
   varValues = varsUtil.addBuiltinsToValues(varValues)
 
-  console.log(varNames, varValues)
+  //console.log(varNames, varValues)
   return interp.interpCommands(tree[0], varNames, varValues)
 }
 
-interp.interpCommands = function(commands, varNames, varValues) {
+interp.interpCommands = (commands, varNames, varValues) => {
   commands.forEach(command => {
-    let commandAndArgs = interp.findCommandAndArgs(command)
+    let commandAndArgs = interp.findCommandAndArgs(command, varNames, varValues)
     command = commandAndArgs[0]
     let args = commandAndArgs[1]
-    // command.call(args)
+    command.apply(this, args)
   })
 }
 
-interp.findCommandAndArgs = function(command, varNames, varValues) {
-  return [null, null]
+interp.findCommandAndArgs = (what, commands) => {
+  let args = []
+  let cmds = commands.filter(command => {
+    let ok = false
+
+    command.forEach((part, i) => {
+      let suppose = what[i] // argument to test against
+
+      if(typeof part === 'function') return
+      else if(part === 'any') { ok = true; args.push(suppose) }
+      else if(part[0] === suppose[0] && part[1].toLowerCase() == suppose[1].toLowerCase()) ok = true
+    })
+
+    return ok
+  })
+
+  if(cmds.length === 0) console.log('Nothing found matching', what)
+  else if(cmds.length > 1) console.log('Too much found matching', what)
+  else var cmd = cmds[0][cmds[0].length-1]
+
+  return [cmd, args]
 }
 
 module.exports = interp

@@ -23,7 +23,28 @@ Command -> CommandPart __ Command {% function(d) { return [d[0][0], ...d[d.lengt
 CommandPart -> Plain
              | String
              | Number
-CommandSeperator -> __ "and" | __ "then" | _ "." | _ ","
+CommandSeperator -> __ "and"
+                  | __ "And"
+
+                  | __ "then"
+                  | __ "Then"
+
+                  | __ "finally"
+                  | __ "Finally"
+
+                  | __ "lastly"
+                  | __ "Lastly"
+
+                  | __ "next"
+                  | __ "Next"
+
+                  | __ "also"
+                  | __ "Also"
+
+                  | _ "."
+                  | _ "!"
+                  | _ ","
+                  | _ ";"
 
 String -> _string {% function(d) { return [C.STRING, d[0][1]] } %}
 _string -> "\"" StringDoubleContents "\""
