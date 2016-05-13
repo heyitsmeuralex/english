@@ -69,23 +69,23 @@ prims.UndefinedPrim = UndefinedPrim
 
 // ScriptPrim
 
-ScriptPrim = function(code, varNames, varValues) {
+ScriptPrim = function(code, args, scope) {
   this.attributes = {
     asString: this.asString,
     asNumber: this.asNumber
   }
+
   this.code = code
-  this.varNames = varNames
-  this.varValues = varValues
+  this.takenArgs = args
+  this.scope = scope || new Scope
 }
 
 ScriptPrim.prototype.call = function(args, interp) {
-  let result
+  this.scope.addVars(args)
   if(this.code instanceof Function)
-    return [this.varNames, this.varValues, this.code(args)]
-  else {
-    return interp.interp(this.code, this.varNames, this.varValues)
-  }
+    return this.code(this.scope)
+  else
+    return interp.interp(this.code, this.scope)
 }
 
 ScriptPrim.prototype.getValue = function() { return this.asString() }

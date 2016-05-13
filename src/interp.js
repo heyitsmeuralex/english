@@ -1,12 +1,14 @@
 'use strict'
 
-const constants    = require('./constants')
-const plain = constants.PLAIN
+const constants  = require('./constants')
+const variables  = require('./variables')
+const prims      = require('./primitives')
+const plain      = constants.PLAIN
 
-let interp   = {}
+let interp = {}
 
 interp.interp = (tree, dev) => {
-  let scope = [
+  /*let scope = [
     {
       type: 'script',
       identifier: [[plain, 'print'], 'any'],
@@ -37,7 +39,11 @@ interp.interp = (tree, dev) => {
         return identifier[1]
       }
     },
-  ]
+  ]*/
+  let scopes = []
+  scopes.push(new Scope)
+  scopes[0].addVars(vars.BUILTIN)
+  let currentScope = 0
 
   return interp.interpCommands(tree[0], scope)
 }
@@ -61,7 +67,7 @@ interp.interpCommands = (commands, scope) => {
 interp.findCommandAndArgs = (what, scope) => {
   let args = []
   let cmds = scope.filter(some => some.type === 'script').filter(script => {
-    let ok = 'idk'
+    let ok = null
 
     script.identifier.forEach((part, i) => {
       let suppose = what[i] // argument to test against
@@ -75,8 +81,8 @@ interp.findCommandAndArgs = (what, scope) => {
     return ok
   })
 
-  if(cmds.length === 0) throw ('Nothing found matching '+what)
-  else if(cmds.length > 1) throw ('Too much found matching '+what)
+  if(cmds.length === 0) throw ('Nothing found matching ' + what)
+  // else if(cmds.length > 1) throw ('Too much found matching ' + what) -- this should be allowed.
   else var cmd = cmds[0].value
 
   return [cmd, args]
