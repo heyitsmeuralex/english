@@ -29,21 +29,24 @@ interp.interpCommands = (commands, varNames, varValues) => {
 interp.findCommandAndArgs = (what, commands) => {
   let args = []
   let cmds = commands.filter(command => {
-    let ok = false
+    let ok = 'idk'
 
     command.forEach((part, i) => {
       let suppose = what[i] // argument to test against
 
-      if(typeof part === 'function') return
+      if(typeof part === 'function' || ok === false) return
       else if(part === 'any') { ok = true; args.push(suppose) }
       else if(part[0] === suppose[0] && part[1].toLowerCase() == suppose[1].toLowerCase()) ok = true
+      else ok = false
+    
+      console.log(part, 'vs', suppose)
     })
 
     return ok
   })
 
-  if(cmds.length === 0) console.log('Nothing found matching', what)
-  else if(cmds.length > 1) console.log('Too much found matching', what)
+  if(cmds.length === 0) throw ('Nothing found matching '+what)
+  else if(cmds.length > 1) throw ('Too much found matching '+what)
   else var cmd = cmds[0][cmds[0].length-1]
 
   return [cmd, args]
